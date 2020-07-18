@@ -8,6 +8,7 @@
 .profile-container header {
   display: flex;
   align-items: center;
+  margin: 20px;
 }
 
 .profile-container header span {
@@ -33,4 +34,32 @@
 
 .profile-container header button:hover {
   border-color: #999;
+}
+
+.profile-container table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 100%;
+}
+
+.profile-container table td,
+th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+  font-size: 16px;
+}
+
+.profile-container table tr:nth-child(even) {
+  background-color: #e9e8e8;
+}
+
+.profile-container table td button {
+  background: none;
+  border: none;
+  margin: 6px;
+}
+
+.profile-container table td button:hover {
+  opacity: 0.5;
 }
