@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { FiArrowLeft } from "react-icons/fi";
 
@@ -8,6 +8,14 @@ import api from "../../services/api";
 
 export default function CadastraAssociado() {
   const history = useHistory();
+
+  const [associados, setAssociados] = useState([]);
+
+  useEffect(() => {
+    api.get("associados").then((response) => {
+      setAssociados(response.data);
+    });
+  }, []);
 
   const [tipo, setTipo] = useState("");
   const [patrocinador, setPatrocinador] = useState("");
@@ -72,13 +80,20 @@ export default function CadastraAssociado() {
             <option value="Principal">Principal</option>
             <option value="Dependente">Dependente</option>
           </select>
-          <input
+          <select
+            name="tipo"
+            id="tipo"
             className="input-button"
-            placeholder="Patrocinador"
-            hidden={tipo !== "Dependente"}
             value={patrocinador}
             onChange={(e) => setPatrocinador(e.target.value)}
-          />
+            hidden={tipo === "Principal"}
+          >
+            <option value="">Assoc. Principal</option>
+            {associados.map(function (associado) {
+              return <option value={associado.id}>{associado.nome}</option>;
+            })}
+            <option value="">Tipo de Assoc.</option>
+          </select>
           <input
             className="input-button"
             placeholder="Nome Completo"
